@@ -150,27 +150,7 @@
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .visitor-counter {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            margin-top: 30px;
-        }
 
-        .visitor-counter h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
-
-        .visitor-count {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffd93d;
-        }
 
         .footer {
             text-align: center;
@@ -205,7 +185,7 @@
 
         <main class="games-grid">
             <!-- Tetris Card -->
-            <div class="game-card" onclick="openGame('https://sbaromero.github.io/TetrisClassic/')" role="button" tabindex="0">
+            <div class="game-card" onclick="openGame('https://sbaromero.github.io/TetrisClassic/', this)" role="button" tabindex="0">
                 <div class="game-card-header tetris-header">
                     <div class="game-icon">
                         🧩
@@ -225,7 +205,7 @@
             </div>
 
             <!-- Pacman Card -->
-            <div class="game-card" onclick="openGame('https://sbaromero.github.io/PacmanClassic/')" role="button" tabindex="0">
+            <div class="game-card" onclick="openGame('https://sbaromero.github.io/PacmanClassic/', this)" role="button" tabindex="0">
                 <div class="game-card-header pacman-header">
                     <div class="game-icon">
                         👻
@@ -245,11 +225,7 @@
             </div>
         </main>
 
-        <!-- Visitor Counter -->
-        <div class="visitor-counter">
-            <h3>👥 Visitantes</h3>
-            <div class="visitor-count" id="visitorCount">0</div>
-        </div>
+
 
         <footer class="footer">
             <p>&copy; 2024 Hub de Juegos | Desarrollado con ❤️ por Seba Romero</p>
@@ -260,31 +236,20 @@
     </div>
 
     <script>
-        // Visitor Counter
-        function updateVisitorCount() {
-            let count = localStorage.getItem('visitorCount');
-            if (!count) {
-                count = 0;
-            }
-            count = parseInt(count) + 1;
-            localStorage.setItem('visitorCount', count);
-            document.getElementById('visitorCount').textContent = count.toLocaleString();
-        }
+
 
         // Open game function
-        function openGame(url) {
+        function openGame(url, element) {
             // Add click animation
-            event.currentTarget.style.transform = 'scale(0.95)';
+            element.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                event.currentTarget.style.transform = '';
+                element.style.transform = '';
                 window.open(url, '_blank', 'noopener,noreferrer');
             }, 150);
         }
 
-        // Initialize visitor counter on page load
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            updateVisitorCount();
-            
             // Add entrance animation
             document.querySelectorAll('.game-card').forEach((card, index) => {
                 card.style.opacity = '0';
